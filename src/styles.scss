@@ -1,0 +1,21 @@
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h3 {
+  margin: 0 !important;
+}
+
+a {
+  color: #0093d2;
+}
+
+mat-spinner {
+  position: absolute;
+  left: 45%;
+}

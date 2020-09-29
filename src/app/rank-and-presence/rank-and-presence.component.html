@@ -1,0 +1,15 @@
+<section>
+    <h2>Product Presence</h2>
+    <app-category-menu></app-category-menu>
+    <mat-spinner *ngIf="loading"></mat-spinner>
+
+</section>
+
+<ng-container *ngIf="showResults">
+    <h3>Average Ranks</h3>
+    <app-table [data]="productsAvRank" dataSourceName="productsAvRank"
+               [displayedColumns]="averageRankColumns"></app-table>
+    <br><br>
+    <h3>Product Presence</h3>
+    <app-table [data]="productsPR" dataSourceName="productsPR" [displayedColumns]="presenceRateColumns"></app-table>
+</ng-container>

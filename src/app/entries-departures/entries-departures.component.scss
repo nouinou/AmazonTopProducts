@@ -1,0 +1,14 @@
+form {
+  position: relative;
+  width: 100%;
+
+  mat-form-field {
+    width: 40%;
+    margin-right: 10px
+  }
+
+  .error {
+    font-size: 0.8em;
+    color: #de1313;
+  }
+}

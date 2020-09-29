@@ -1,0 +1,29 @@
+<section class="top">
+    <div>
+        <h2>Daily Top Product Chart</h2>
+        <h3>{{productCategoryName}}</h3>
+
+        <app-category-menu></app-category-menu>
+    </div>
+    <div *ngIf="selectedProduct">
+        <mat-card>
+            <p>{{selectedProduct.name}}</p>
+            <p>ASIN: {{selectedProduct.asin}}</p>
+            <p><a [href]="selectedProduct.link" target="_blank">{{selectedProduct.link}}</a></p>
+        </mat-card>
+    </div>
+</section>
+
+<mat-form-field>
+    <mat-label>Top:</mat-label>
+    <select matNativeControl required (change)="changeTopNumber($event.target.value)">
+        <option value="10">10</option>
+        <option value="20">20</option>
+    </select>
+</mat-form-field>
+
+<section>
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <div id="product-rank-chart"></div>
+    <div *ngIf="!loading && !selectedProduct"> Hover or click on a circle to get more detail</div>
+</section>

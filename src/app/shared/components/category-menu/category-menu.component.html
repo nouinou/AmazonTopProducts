@@ -1,0 +1,11 @@
+<mat-form-field>
+    <mat-label>Product Category</mat-label>
+    <select matNativeControl required (change)="selectProductCategory($event.target.value)">
+        <option
+                *ngFor="let category of categories"
+                [selected]="category === selectedProductCategory"
+                [value]="category">
+            {{category}}
+        </option>
+    </select>
+</mat-form-field>

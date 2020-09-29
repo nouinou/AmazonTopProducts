@@ -1,0 +1,38 @@
+<div id="table">
+    <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <label>
+            <input matInput (keyup)="applyFilter($event)">
+        </label>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col">-->
+                <th mat-header-cell
+                    [ngClass]="{'small-col': col.toLowerCase().includes('rank') || col.toLowerCase().includes('asin') || col.toLowerCase().includes('rate')}"
+                    *matHeaderCellDef
+                    mat-sort-header>
+                    <span *ngIf="col === 'asin';else colName">Product's ASIN</span>
+                    <ng-template #colName>{{col | titlecase}}</ng-template>
+                </th>
+                <td mat-cell
+                    [ngClass]="{truncate: col.toLowerCase() === 'name', 'small-col': col.toLowerCase().includes('rank') || col.toLowerCase().includes('asin') || col.toLowerCase().includes('rate')}"
+                    *matCellDef="let row">
+
+                    <ng-container *ngIf="col.toLowerCase() !== 'link';else linkTemplate">
+                        {{row[col]}}<span *ngIf="col === 'presence rate'">% </span>
+                    </ng-container>
+
+                    <ng-template #linkTemplate><a [href]="row[col]" target="_blank"> {{ row[col] }} </a></ng-template>
+
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+</div>

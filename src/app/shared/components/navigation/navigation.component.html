@@ -1,0 +1,4 @@
+<ng-container *ngFor="let page of pages">
+    <button mat-button [routerLink]="page.link" routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }">{{ page.name }}</button>
+</ng-container>

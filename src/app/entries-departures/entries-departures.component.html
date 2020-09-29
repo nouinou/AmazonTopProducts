@@ -1,0 +1,55 @@
+<section>
+    <h2>Entries/Departures</h2>
+    <app-category-menu></app-category-menu>
+    <mat-spinner *ngIf="loading"> </mat-spinner>
+</section>
+
+
+<ng-container *ngIf="!loading">
+    <p *ngIf="!loading">Weeks:</p>
+    <form>
+        <mat-form-field>
+            <select matNativeControl (change)="onSelectedWeek1($event.target.value)">
+                <option disabled selected value> -- select week 1 --</option>
+                <option
+                        *ngFor="let week of weeks"
+                        [value]="week">
+                    {{week}}: ({{weekRanges[week]}})
+                </option>
+            </select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <select matNativeControl (change)="onSelectedWeek2($event.target.value)">
+                <option disabled selected value> -- select week 2 --</option>
+                <option
+                        *ngFor="let week of weeks"
+                        [disabled]="week <= selectedWeek1"
+                        [value]="week">
+                    {{week}}: ({{weekRanges[week]}}
+                </option>
+            </select>
+        </mat-form-field>
+
+        <button mat-raised-button type="button"
+                [disabled]="!selectedWeek1 || !selectedWeek2 || selectedWeek1 >= selectedWeek2"
+                (click)="getInsAndOuts(selectedWeek1,selectedWeek2)"
+        >Compare</button>
+        <div class="error" *ngIf="selectedWeek1 > selectedWeek2"> Please select a greater second week number</div>
+        <div class="error" *ngIf="selectedWeek2 && selectedWeek1 == selectedWeek2"> You are choosing the same week</div>
+    </form>
+</ng-container>
+
+<br>
+
+<mat-spinner *ngIf="loadingTables"> </mat-spinner>
+
+<ng-container *ngIf="showTables">
+    <h3>Entries</h3>
+    <app-table  [data]="entries" dataSourceName="entries"  [displayedColumns]="columns"></app-table>
+</ng-container>
+<br>
+<ng-container *ngIf="showTables">
+    <h3>Departures</h3>
+    <app-table *ngIf="showTables" [data]="leaves" dataSourceName="leaves" [displayedColumns]="columns"></app-table>
+</ng-container>
