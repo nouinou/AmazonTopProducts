@@ -3,7 +3,7 @@
 This project was generated with
 [Angular CLI](https://github.com/angular/angular-cli) version 9.1.12.
 
-## Setup (Run with single command line)
+## Setup (Run with a single command line)
 
 If it's the first time you run this projust run `npm run setup` in
 order to install dependencies and serve the angular project. After the
